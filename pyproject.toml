@@ -1,0 +1,88 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "unmark"
+version = "0.1.0"
+description = "Inspect and prepare AI-assisted text and document metadata"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "c2pa-python>=0.37,<0.38",
+    "pydantic>=2.7",
+    "typer>=0.12",
+    "rich>=13.7",
+]
+
+[project.optional-dependencies]
+api = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "python-multipart>=0.0.9",
+]
+dev = [
+    "build>=1.2",
+    "hatchling>=1.25",
+    "pytest>=8.2",
+    "hypothesis>=6.100",
+    "httpx2>=2.10",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+unmark = "unmark.cli.app:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/unmark"]
+# PEP 561: ship the marker so consumers can type-check against unmark.
+artifacts = ["src/unmark/py.typed"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"skills" = "unmark/bundled_skills"
+
+[tool.hatch.build.targets.sdist]
+include = ["/README.md", "/pyproject.toml", "/src", "/skills"]
+ignore-vcs = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF", "N", "C4", "PTH", "RET"]
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+# SIM117: nested `with` is deliberate in tests -- `pytest.raises` must scope to
+# the specific call under test, not to the surrounding setup.
+"tests/*" = ["RUF001", "SIM117"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unreachable = true
+disallow_any_generics = true
+no_implicit_reexport = true
+files = ["src", "tests"]
+plugins = []
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_untyped_calls = false
+disallow_incomplete_defs = false
+
+# click is a transitive dependency of typer and ships no stubs of its own that
+# mypy resolves in every environment; it is only used for exception mapping.
+[[tool.mypy.overrides]]
+module = "click.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = ["slow: long-running tests"]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Voice Analysis"
+  short_description: "Create a reviewable Unmarked writing-voice profile"
+  default_prompt: "Use $voice-analysis to analyze these writing samples and save a reviewable Unmarked voice profile."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unmarked Rewrite"
+  short_description: "Rewrite through a verified external provider"
+  default_prompt: "Use $unmark-rewrite to verify external-model configuration and provider separation, then complete a fidelity-gated rewrite."

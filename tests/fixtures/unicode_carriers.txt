@@ -1,0 +1,7 @@
+Zero width​space here.
+Family emoji 👨‍👩‍👧 stays intact.
+Persian می‌روم word.
+Arabic مرحبا ‏مرحبا‏ text.
+Heart ❤️ selector.
+Non-breaking space and thin space.
+Tag payload 󠀁󠀢 hidden.

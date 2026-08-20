@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unmarked Clean"
+  short_description: "Clean recognized Unicode and attachment metadata"
+  default_prompt: "Use $unmark-clean to inspect this content, apply only relevant deterministic cleaning, and report exactly what changed."

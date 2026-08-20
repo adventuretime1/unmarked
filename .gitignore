@@ -1,0 +1,48 @@
+# Local environments and secrets
+.venv/
+.env
+.env.*
+!.env.example
+.dev.vars
+!.dev.vars.example
+
+# Python caches and tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.hypothesis/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# General build artifacts
+build/
+dist/
+
+# Unmarked runtime state and generated output
+.unmark/
+*.unmark.*
+.cloak/runs/
+.runs/
+.stuff/
+
+# Local evaluation material and working notes (not tracked for now)
+evals/
+working-notes/
+
+# Editor, agent, and operating-system files
+.DS_Store
+.idea/
+.vscode/
+.agents/
+*~
+AGENTS.md
+CLAUDE.md
+/.claude/
+/.codex/
+/.mcp.json
+/.repowise-venv/
+/.repowise/
+/.serena/
