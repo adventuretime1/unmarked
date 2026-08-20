@@ -43,7 +43,7 @@ Unmarked addresses the first three cases by using a variety of methods. It does 
 ### Paste this into your agent
 
 ```text
-Install Unmarked from https://github.com/adventuretime1/unmarked/edit/main/README.md with uv so the `unmark`
+Install Unmarked from https://github.com/adventuretime1/unmarked with uv so the `unmark`
 command is available in this environment. Install uv from its official source if
 needed, and run `uv tool update-shell` only if the tool directory is not on PATH.
 Verify `unmark --version`. Detect whether you are Claude Code, Codex, or Pi, then

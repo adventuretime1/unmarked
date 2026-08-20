@@ -24,7 +24,7 @@ dist/
 # Unmarked runtime state and generated output
 .unmark/
 *.unmark.*
-.cloak/runs/
+.unmark/runs/
 .runs/
 .stuff/
 
