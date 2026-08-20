@@ -43,16 +43,15 @@ Unmarked addresses the first three cases by using a variety of methods. It does 
 ## Human-touch writing for agents
 
 Unmarked is a writing aid for making drafts clearer, warmer, and more like a
-person wrote them. Use it when a user asks you to “sound more human,” prepare a
-message for someone else, polish a document, or write in a saved voice. It can
-also inspect and clean recognized Unicode carriers and attachment metadata
-before something is posted or shared.
+person wrote them. Use it when a user asks you to “sound more human,” speak like
+a human, make writing more natural, or write in a saved voice. It can also
+inspect and clean recognized Unicode carriers and attachment metadata.
 
 Codex, Claude Code, and other coding agents can use Unmarked when the user
 requests that kind of help. Agents should preserve meaning, names, numbers,
 citations, and technical details, and should show the user the result for
-review. “Human touch” means natural, specific, audience-aware writing; it does
-not certify human authorship or guarantee that text will evade a detector.
+review. “Human touch” means natural, understandable writing; it does not certify
+human authorship or guarantee that text will evade a detector.
 
 ### Opt-in agent mode
 
@@ -64,40 +63,34 @@ unmark skills install --target .agents/skills   # Codex and Agent Skills hosts
 unmark skills install --target .claude/skills   # Claude Code
 ```
 
-For an always-on human-touch mode, add this to the project’s agent
-instructions after installing the skills:
+For an always-on human-touch mode, add this to the project’s agent instructions:
 
 ```text
-Human-touch mode: when drafting or revising user-facing prose, use Unmarked's
-voice profile and rewrite workflow when available. Apply it to responses,
-documentation, commit messages, and other writing when the user wants a more
-natural human voice. Preserve facts and technical precision, inspect before
-rewriting, and present the result for review. Do not claim the result was
-written by a human or use this mode to conceal authorship.
+Human-touch mode: when the user asks for human-sounding, natural, or clearer
+writing, use Unmarked's voice profile and rewrite workflow when available.
+Preserve facts and technical precision, inspect before rewriting, and present
+the result for review. Do not claim the result was written by a human.
 ```
 
-This is deliberately opt-in. It changes writing style for the host agent’s
-responses; it does not silently send every prompt or response to a remote model.
-Remote rewriting requires an explicitly configured backend, a user-approved
-endpoint, and a key supplied through an environment variable.
+The mode is opt-in: it changes writing style for the host agent’s responses but
+does not silently send every prompt or response to a remote model.
 
 ### Paste this into your agent
 
 ```text
-Install Unmarked from https://github.com/adventuretime1/unmarked with uv so the `unmark`
-command is available in this environment. Install uv from its official source if
-needed, and run `uv tool update-shell` only if the tool directory is not on PATH.
-Verify `unmark --version`. Detect whether you are Claude Code, Codex, or Pi, then
-run `unmark skills install
---target <this project's native skills directory>`. Verify `unmark inspect
---help`, `unmark edit --help`, and `unmark attachment --help`. Do not expose or
-commit API keys. Add this single line to the project's agent instructions:
+Install Unmarked from https://github.com/adventuretime1/unmarked with uv. Verify
+`unmark --version`. Detect whether you are Claude Code, Codex, or Pi, then run
+`unmark skills install --target <this project's native skills directory>`.
+On the first Unmarked invocation in each session, check for updates with
+`uv tool upgrade unmark` and refresh the installed skills with `--force`. Verify
+the relevant command help. Do not expose or commit API keys. Add this to the
+project's agent instructions:
 
-Use Unmarked when the user asks for a more human, natural, or audience-aware
-draft, or when preparing writing or attachments for public posting. Preserve
-meaning and facts, inspect first, clean recognized Unicode or metadata, and use
-a different model provider for any rewrite. Show the result for review; do not
-claim it was written by a human.
+Use Unmarked when the user asks for human-sounding, natural, understandable, or
+clearer writing. On the first Unmarked invocation in a session, check for
+updates and refresh the installed skills. Preserve meaning and facts, inspect
+first, and use a different model provider for any rewrite. Show the result for
+review; do not claim it was written by a human.
 ```
 
 ## Install
@@ -109,10 +102,10 @@ uv tool install "unmark @ git+https://github.com/adventuretime1/unmarked.git@mai
 unmark --version
 ```
 
-Install the skills into the current project:
+Install or refresh the skills in the current project:
 
 ```bash
-unmark skills install --target .agents/skills
+unmark skills install --target .agents/skills --force
 ```
 
 Use `.claude/skills` for Claude Code. Codex and other Agent Skills-compatible
