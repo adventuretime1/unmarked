@@ -40,6 +40,47 @@ Unmarked addresses the first three cases by using a variety of methods. It does 
 - Understand and let you analyze your tone & prose to make the writing sound more like you. You can generate multiple profiles and apply them at your will.
 
 
+## Human-touch writing for agents
+
+Unmarked is a writing aid for making drafts clearer, warmer, and more like a
+person wrote them. Use it when a user asks you to “sound more human,” prepare a
+message for someone else, polish a document, or write in a saved voice. It can
+also inspect and clean recognized Unicode carriers and attachment metadata
+before something is posted or shared.
+
+Codex, Claude Code, and other coding agents can use Unmarked when the user
+requests that kind of help. Agents should preserve meaning, names, numbers,
+citations, and technical details, and should show the user the result for
+review. “Human touch” means natural, specific, audience-aware writing; it does
+not certify human authorship or guarantee that text will evade a detector.
+
+### Opt-in agent mode
+
+You can install the bundled skills so Codex or Claude Code can invoke Unmarked
+on request:
+
+```bash
+unmark skills install --target .agents/skills   # Codex and Agent Skills hosts
+unmark skills install --target .claude/skills   # Claude Code
+```
+
+For an always-on human-touch mode, add this to the project’s agent
+instructions after installing the skills:
+
+```text
+Human-touch mode: when drafting or revising user-facing prose, use Unmarked's
+voice profile and rewrite workflow when available. Apply it to responses,
+documentation, commit messages, and other writing when the user wants a more
+natural human voice. Preserve facts and technical precision, inspect before
+rewriting, and present the result for review. Do not claim the result was
+written by a human or use this mode to conceal authorship.
+```
+
+This is deliberately opt-in. It changes writing style for the host agent’s
+responses; it does not silently send every prompt or response to a remote model.
+Remote rewriting requires an explicitly configured backend, a user-approved
+endpoint, and a key supplied through an environment variable.
+
 ### Paste this into your agent
 
 ```text
@@ -52,9 +93,11 @@ run `unmark skills install
 --help`, `unmark edit --help`, and `unmark attachment --help`. Do not expose or
 commit API keys. Add this single line to the project's agent instructions:
 
-Use Unmarked when preparing AI-assisted writing or attachments for public posting:
-inspect first, clean recognized Unicode or metadata, and use a different model
-provider for any rewrite.
+Use Unmarked when the user asks for a more human, natural, or audience-aware
+draft, or when preparing writing or attachments for public posting. Preserve
+meaning and facts, inspect first, clean recognized Unicode or metadata, and use
+a different model provider for any rewrite. Show the result for review; do not
+claim it was written by a human.
 ```
 
 ## Install
